@@ -45,8 +45,11 @@ def add_response_command(message):
 	if  response is '':
 		responder_bot.reply_to(message, 'Cant add empty messages. Try again!')
 	else:
-		text_messages_list.append(response)
-		responder_bot.reply_to(message, 'Added: ' +response)
+		if response not in text_messages_list:
+			text_messages_list.append(response)
+			responder_bot.reply_to(message, 'Added: ' + response)
+		else:
+			responder_bot.reply_to(message, 'It is a duplicate response')
 
 
 # Message handler for the remove-response command
@@ -60,7 +63,7 @@ def remove_response_command(message):
 		text_messages_list.remove(response)
 		responder_bot.reply_to(message, 'Done. Use /list to see other resonses')
 	except:
-		responder_bot.reply_to(message, 'Something went wrong. Yield to @israelzuniga')
+		responder_bot.reply_to(message, 'Hey! The message wasnt in the list.')
 
 
 # Message handler for the list-response command
@@ -69,7 +72,7 @@ def list_messages_command(message):
 	'''
 	List
 	'''
-	if responder_utils.command_remove(message.text) is not '':
+	if not text_messages_list:
 		responder_bot.reply_to(message, 'Please, add responses with /add')
 	else:
 		responder_bot.reply_to(message, str(text_messages_list))
