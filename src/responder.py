@@ -23,7 +23,6 @@ Commands:
 /add - Add a message to the DB
 /list - List messages
 /remove - Remove a message
-/send - Send love
 '''
 
 # Message hanlder for the start command
@@ -43,11 +42,11 @@ def add_response_command(message):
 	Add
 	'''
 	response = responder_utils.command_remove(message.text)
-	if  response is not '':
+	if  response is '':
+		responder_bot.reply_to(message, 'Cant add empty messages. Try again!')
+	else:
 		text_messages_list.append(response)
 		responder_bot.reply_to(message, 'Added: ' +response)
-	else:
-		responder_bot.reply_to(message, 'Can\\'t add empty messages. Try again!)
 
 
 # Message handler for the remove-response command
@@ -71,9 +70,9 @@ def list_messages_command(message):
 	List
 	'''
 	if responder_utils.command_remove(message.text) is not '':
-		responder_bot.reply_to(message, str(text_messages_list))
-	else:
 		responder_bot.reply_to(message, 'Please, add responses with /add')
+	else:
+		responder_bot.reply_to(message, str(text_messages_list))
 
 
 # Handler for the in-line command
