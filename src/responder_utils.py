@@ -17,4 +17,5 @@ def command_remove(message_text):
 	for element in split_message[1:]:
 		joiner += element + ' '
 
+	joiner = joiner.strip()
 	return joiner
