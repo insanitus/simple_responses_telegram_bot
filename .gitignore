@@ -1,2 +1,4 @@
 
 src/apikeys.source-dev
+
+*.pyc
